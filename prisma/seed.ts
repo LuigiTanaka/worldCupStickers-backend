@@ -25,5 +25,3 @@ main()
     .finally(() => {
         prisma.$disconnect();
     });
-
-//TRUNCATE TABLE groups RESTART IDENTITY CASCADE;

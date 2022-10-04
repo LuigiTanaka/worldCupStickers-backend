@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc && npx prisma migrate deploy",
     "start": "node dist/src/server.js",
-    "dev": "dotenv -e .env.test nodemon src/server.ts"
+    "dev": "dotenv -e .env.test nodemon src/server.ts",
+    "prisma": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test prisma db seed"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
