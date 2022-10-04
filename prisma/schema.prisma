@@ -9,3 +9,56 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            Int           @id @default(autoincrement())
+  username      String        @unique @db.VarChar(25)
+  email         String        @unique
+  password      String
+  pictureUrl    String?
+  stickersUsers StickerUser[]
+
+  @@map("users")
+}
+
+model Group {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique @db.VarChar(1)
+  categories Category[]
+
+  @@map("groups")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  group    Group?    @relation(fields: [groupId], references: [id])
+  groupId  Int?
+  stickers Sticker[]
+
+  @@map("categories")
+}
+
+model Sticker {
+  id            Int           @id @default(autoincrement())
+  name          String        @db.VarChar(3)
+  number        Int
+  category      Category      @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+  stickersUsers StickerUser[]
+
+  @@unique([name, number])
+  @@map("stickers")
+}
+
+model StickerUser {
+  id        Int     @id @default(autoincrement())
+  quantity  Int     @default(1)
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  sticker   Sticker @relation(fields: [stickerId], references: [id])
+  stickerId Int
+
+  @@unique([userId, stickerId])
+  @@map("stickersUsers")
+}
