@@ -41,13 +41,11 @@ model Category {
 
 model Sticker {
   id            Int           @id @default(autoincrement())
-  name          String        @db.VarChar(3)
-  number        Int
+  name          String        @unique @db.VarChar(6)
   category      Category      @relation(fields: [categoryId], references: [id])
   categoryId    Int
   stickersUsers StickerUser[]
 
-  @@unique([name, number])
   @@map("stickers")
 }
 
