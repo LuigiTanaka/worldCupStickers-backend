@@ -1,43 +1,19 @@
 import prisma from "../src/database/prisma";
+import { groups, categories, stickers } from "./data";
 
 async function main() {
-    const groups = [{ name: "A" }];
-    const categories = [
-        { name: "Qatar", groupId: 1 },
-        { name: "Ecuador", groupId: 1 },
-        { name: "Senegal", groupId: 1 },
-        { name: "Netherlands", groupId: 1 },
-    ];
-    const stickers = ["QAT", "ECU", "SEN", "NED"];
+    await prisma.$executeRaw`TRUNCATE TABLE groups RESTART IDENTITY CASCADE`;
 
-    groups.map(async (group) => {
-        await prisma.group.upsert({
-            where: { name: group.name },
-            update: {},
-            create: { name: group.name },
-        });
+    await prisma.group.createMany({
+        data: groups,
     });
 
-    categories.map(async (category) => {
-        await prisma.category.upsert({
-            where: { name: category.name },
-            update: {},
-            create: category,
-        });
+    await prisma.category.createMany({
+        data: categories,
     });
 
-    stickers.map(async (stickerName, index) => {
-        for (let i = 1; i <= 20; i++) {
-            await prisma.sticker.upsert({
-                where: { name: stickerName, number: i },
-                update: {},
-                create: {
-                    name: stickerName,
-                    number: i,
-                    categoryId: index,
-                },
-            });
-        }
+    await prisma.sticker.createMany({
+        data: stickers,
     });
 }
 
@@ -49,3 +25,5 @@ main()
     .finally(() => {
         prisma.$disconnect();
     });
+
+//TRUNCATE TABLE groups RESTART IDENTITY CASCADE;
