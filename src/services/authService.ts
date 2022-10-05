@@ -57,3 +57,8 @@ export async function signIn(email: string, password: string) {
         token,
     };
 }
+
+export async function findUserById(id: number) {
+    const user = authRepository.findUserById(id);
+    return user;
+}
