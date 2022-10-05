@@ -9,3 +9,8 @@ export async function getUserByEmail(email: string) {
 export async function insert(userData: IAuthType) {
     await prisma.user.create({ data: userData });
 }
+
+export async function findUserById(id: number) {
+    const user = prisma.user.findUnique({ where: { id } });
+    return user;
+}
