@@ -6,6 +6,11 @@ export async function getUserByEmail(email: string) {
     return user;
 }
 
+export async function getUserByUsername(username: string) {
+    const user = await prisma.user.findUnique({ where: { username } });
+    return user;
+}
+
 export async function insert(userData: IAuthType) {
     await prisma.user.create({ data: userData });
 }

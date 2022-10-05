@@ -13,10 +13,18 @@ export async function signUp(
     email: string,
     password: string
 ) {
-    const existingUser = await authRepository.getUserByEmail(email);
+    const existingUserByEmail = await authRepository.getUserByEmail(email);
 
-    if (existingUser) {
+    if (existingUserByEmail) {
         throw conflictError("email already registered");
+    }
+
+    const existingUserByUsername = await authRepository.getUserByUsername(
+        username
+    );
+
+    if (existingUserByUsername) {
+        throw conflictError("username already registered");
     }
 
     const SALT = Number(process.env.SALT) || 10;
