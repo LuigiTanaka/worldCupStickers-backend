@@ -23,7 +23,7 @@ model User {
 
 model Group {
   id         Int        @id @default(autoincrement())
-  name       String     @unique @db.VarChar(1)
+  name       String     @unique
   categories Category[]
 
   @@map("groups")
