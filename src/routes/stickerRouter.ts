@@ -14,5 +14,6 @@ stickerRouter.get(
     "/stickers/:categoryId",
     stickerController.getStickersWithQuantityByCategoryId
 );
+stickerRouter.post("/stickers/:stickerId", stickerController.createStickerUser);
 
 export default stickerRouter;

@@ -32,3 +32,14 @@ export async function getStickersWithQuantityByCategoryId(
 
     res.status(200).send(stickers);
 }
+
+export async function createStickerUser(req: Request, res: Response) {
+    const { stickerId } = req.params;
+    const { userId } = res.locals;
+
+    await stickerService.createStickerUser(Number(userId), Number(stickerId));
+
+    res.status(201).send(
+        "relation between user and sticker created successfully"
+    );
+}

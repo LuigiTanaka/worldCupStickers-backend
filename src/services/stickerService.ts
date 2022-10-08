@@ -39,3 +39,12 @@ export async function getStickersWithQuantityByCategoryId(
 
     return stickersWithQuantity;
 }
+
+export async function createStickerUser(userId: number, stickerId: number) {
+    const stickerUserData = {
+        userId,
+        stickerId,
+    };
+
+    await stickerRepository.insertStickerUser(stickerUserData);
+}
