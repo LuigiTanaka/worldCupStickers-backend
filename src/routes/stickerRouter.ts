@@ -15,5 +15,9 @@ stickerRouter.get(
     stickerController.getStickersWithQuantityByCategoryId
 );
 stickerRouter.post("/stickers/:stickerId", stickerController.createStickerUser);
+stickerRouter.delete(
+    "/stickers/:stickerId",
+    stickerController.deleteStickerUser
+);
 
 export default stickerRouter;

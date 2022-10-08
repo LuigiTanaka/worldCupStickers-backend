@@ -12,3 +12,7 @@ export interface IStickerWithQuantityType {
 export interface IQuantityType {
     quantity: number;
 }
+
+export interface IIdType {
+    id: number;
+}

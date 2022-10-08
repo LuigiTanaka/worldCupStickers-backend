@@ -43,3 +43,14 @@ export async function createStickerUser(req: Request, res: Response) {
         "relation between user and sticker created successfully"
     );
 }
+
+export async function deleteStickerUser(req: Request, res: Response) {
+    const { stickerId } = req.params;
+    const { userId } = res.locals;
+
+    await stickerService.deleteStickerUser(Number(userId), Number(stickerId));
+
+    res.status(200).send(
+        "relation between user and sticker deleted successfully"
+    );
+}
