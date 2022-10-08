@@ -12,7 +12,7 @@ stickerRouter.get(
 );
 stickerRouter.get(
     "/stickers/:categoryId",
-    stickerController.getStickersByCategoryId
+    stickerController.getStickersWithQuantityByCategoryId
 );
 
 export default stickerRouter;
