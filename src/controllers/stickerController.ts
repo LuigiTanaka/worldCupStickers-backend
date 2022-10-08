@@ -18,11 +18,14 @@ export async function getCategoriesByGroupId(req: Request, res: Response) {
     res.status(200).send(categories);
 }
 
-export async function getStickersByCategoryId(req: Request, res: Response) {
+export async function getStickersWithQuantityByCategoryId(
+    req: Request,
+    res: Response
+) {
     const { categoryId } = req.params;
     const { userId } = res.locals;
 
-    const stickers = await stickerService.getStickersByCategoryId(
+    const stickers = await stickerService.getStickersWithQuantityByCategoryId(
         Number(categoryId),
         Number(userId)
     );

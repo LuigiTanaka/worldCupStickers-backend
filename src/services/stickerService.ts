@@ -11,7 +11,7 @@ export async function getCategoriesByGroupId(groupId: number) {
     return categories;
 }
 
-export async function getStickersByCategoryId(
+export async function getStickersWithQuantityByCategoryId(
     categoryId: number,
     userId: number
 ) {
