@@ -1,4 +1,5 @@
 import prisma from "../database/prisma";
+import { IQuantityType } from "../types/stickerType";
 
 export async function getAllGroups() {
     const groups = await prisma.group.findMany();
@@ -10,4 +11,18 @@ export async function getCategoriesByGroupId(groupId: number) {
         where: { groupId },
     });
     return categories;
+}
+
+export async function getStickersByCategoryId(categoryId: number) {
+    const stickers = await prisma.sticker.findMany({
+        where: { categoryId },
+    });
+    return stickers;
+}
+
+export async function findStickerUser(stickerId: number, userId: number) {
+    const quantity: IQuantityType[] = await prisma.$queryRaw`
+        SELECT quantity FROM "stickersUsers" WHERE "stickerId"=${stickerId} AND "userId"=${userId}
+    `;
+    return quantity[0];
 }

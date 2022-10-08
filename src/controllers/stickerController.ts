@@ -17,3 +17,15 @@ export async function getCategoriesByGroupId(req: Request, res: Response) {
 
     res.status(200).send(categories);
 }
+
+export async function getStickersByCategoryId(req: Request, res: Response) {
+    const { categoryId } = req.params;
+    const { userId } = res.locals;
+
+    const stickers = await stickerService.getStickersByCategoryId(
+        Number(categoryId),
+        Number(userId)
+    );
+
+    res.status(200).send(stickers);
+}

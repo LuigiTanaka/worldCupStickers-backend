@@ -10,5 +10,9 @@ stickerRouter.get(
     "/stickers/categories/:groupId",
     stickerController.getCategoriesByGroupId
 );
+stickerRouter.get(
+    "/stickers/:categoryId",
+    stickerController.getStickersByCategoryId
+);
 
 export default stickerRouter;
