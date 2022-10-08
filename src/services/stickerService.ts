@@ -4,7 +4,7 @@ import {
     IQuantityType,
     IIdType,
 } from "../types/stickerType";
-import { notFoundError } from "../utils/errorUtils";
+import { notFoundError, conflictError } from "../utils/errorUtils";
 
 export async function getAllGroups() {
     const groups = await stickerRepository.getAllGroups();
@@ -48,7 +48,7 @@ export async function getStickersWithQuantityByCategoryId(
         const stickerId = sticker.id;
 
         const quantity: IQuantityType | undefined =
-            await stickerRepository.findStickerUser(stickerId, userId);
+            await stickerRepository.findStickerUser(userId, stickerId);
 
         if (!quantity) {
             stickersWithQuantity.push({ ...sticker, quantity: 0 });
@@ -74,6 +74,13 @@ export async function createStickerUser(userId: number, stickerId: number) {
 
     if (!user) {
         throw notFoundError("user doesn't exist");
+    }
+
+    const stickerUserId: IIdType | undefined =
+        await stickerRepository.getStickerUserByIds(userId, stickerId);
+
+    if (stickerUserId) {
+        throw conflictError("user already have this stickers");
     }
 
     const stickerUserData = {
@@ -105,4 +112,31 @@ export async function deleteStickerUser(userId: number, stickerId: number) {
     }
 
     await stickerRepository.deleteStickerUser(userId, stickerId);
+}
+
+export async function updateRepeated(
+    userId: number,
+    stickerId: number,
+    quantity: number
+) {
+    const sticker = await stickerRepository.getStickerById(stickerId);
+
+    if (!sticker) {
+        throw notFoundError("sticker doesn't exist");
+    }
+
+    const user = await stickerRepository.getUserById(userId);
+
+    if (!user) {
+        throw notFoundError("user doesn't exist");
+    }
+
+    const stickerUserId: IIdType | undefined =
+        await stickerRepository.getStickerUserByIds(userId, stickerId);
+
+    if (!stickerUserId) {
+        throw notFoundError("user doesn't have this stickers");
+    }
+
+    await stickerRepository.updateStickerUser(userId, stickerId, quantity);
 }

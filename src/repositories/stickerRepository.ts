@@ -20,7 +20,7 @@ export async function getStickersByCategoryId(categoryId: number) {
     return stickers;
 }
 
-export async function findStickerUser(stickerId: number, userId: number) {
+export async function findStickerUser(userId: number, stickerId: number) {
     const quantity: IQuantityType[] = await prisma.$queryRaw`
         SELECT quantity FROM "stickersUsers" WHERE "stickerId"=${stickerId} AND "userId"=${userId}
     `;
@@ -34,6 +34,16 @@ export async function insertStickerUser(stickerUserData: IStickerUserType) {
 export async function deleteStickerUser(userId: number, stickerId: number) {
     await prisma.$queryRaw`
         DELETE FROM "stickersUsers" WHERE "stickerId"=${stickerId} AND "userId"=${userId}
+    `;
+}
+
+export async function updateStickerUser(
+    userId: number,
+    stickerId: number,
+    quantity: number
+) {
+    await prisma.$queryRaw`
+        UPDATE "stickersUsers" SET quantity=${quantity} WHERE "stickerId"=${stickerId} AND "userId"=${userId}
     `;
 }
 

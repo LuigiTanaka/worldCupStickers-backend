@@ -54,3 +54,19 @@ export async function deleteStickerUser(req: Request, res: Response) {
         "relation between user and sticker deleted successfully"
     );
 }
+
+export async function updateRepeated(req: Request, res: Response) {
+    const { quantity } = req.body;
+    const { stickerId } = req.params;
+    const { userId } = res.locals;
+
+    await stickerService.updateRepeated(
+        Number(userId),
+        Number(stickerId),
+        Number(quantity)
+    );
+
+    res.status(200).send(
+        "relation between user and sticker updated successfully"
+    );
+}
