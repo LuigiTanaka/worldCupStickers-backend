@@ -9,8 +9,6 @@ export async function getSumAllStickersByCategories() {
         },
     });
 
-    console.log(sumAll);
-
     return sumAll;
 }
 
