@@ -9,6 +9,8 @@ export async function getSumAllStickersByCategories() {
         },
     });
 
+    console.log(sumAll);
+
     return sumAll;
 }
 
@@ -24,8 +26,6 @@ export async function getSumOwnerStickers(userId: number) {
             quantity: true,
         },
     });
-
-    console.log(sumOwner);
 
     return sumOwner;
 }

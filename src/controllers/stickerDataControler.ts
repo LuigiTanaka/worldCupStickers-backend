@@ -2,6 +2,12 @@ import { Request, Response } from "express";
 
 import * as stickerDataService from "../services/stickerDataService";
 
+export async function getSumAllStickers(req: Request, res: Response) {
+    const sumAll = await stickerDataService.getSumAllStickers();
+
+    res.status(200).send(sumAll);
+}
+
 export async function getSumOwnerStickers(req: Request, res: Response) {
     const { userId } = res.locals;
 
