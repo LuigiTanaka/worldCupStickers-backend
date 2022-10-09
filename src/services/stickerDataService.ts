@@ -14,6 +14,34 @@ export async function getGeneralStickerData(userId: number) {
     };
 }
 
+export async function getGroupStickerData(userId: number, groupId: number) {
+    const sumAllGroup = await getSumAllGroupStickers(groupId);
+    const sumOwnerGroup = await getSumOwnerGroupStickers(userId, groupId);
+
+    return {
+        sumAllGroup,
+        sumOwnerGroup,
+    };
+}
+
+export async function getSumOwnerGroupStickers(
+    userId: number,
+    groupId: number
+) {
+    const owner = await stickerDataRepository.getOwnerGroupStickers(
+        userId,
+        groupId
+    );
+
+    return owner.length;
+}
+
+export async function getSumAllGroupStickers(groupId: number) {
+    const all = await stickerDataRepository.getAllGroupStickers(groupId);
+
+    return all.length;
+}
+
 async function getSumAllStickers() {
     const sumAllByCategory =
         await stickerDataRepository.getSumAllStickersByCategories();

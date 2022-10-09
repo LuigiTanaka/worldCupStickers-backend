@@ -2,14 +2,47 @@ import { equal } from "joi";
 import prisma from "../database/prisma";
 
 export async function getSumAllStickersByCategories() {
-    const sumAll = await prisma.sticker.groupBy({
+    const all = await prisma.sticker.groupBy({
         by: ["categoryId"],
         _count: {
             name: true,
         },
     });
 
-    return sumAll;
+    return all;
+}
+
+export async function getOwnerGroupStickers(userId: number, groupId: number) {
+    const owner = await prisma.stickerUser.findMany({
+        where: {
+            userId: userId,
+            sticker: {
+                category: {
+                    groupId: groupId,
+                },
+            },
+        },
+        select: {
+            id: true,
+        },
+    });
+
+    return owner;
+}
+
+export async function getAllGroupStickers(groupId: number) {
+    const all = await prisma.sticker.findMany({
+        where: {
+            category: {
+                groupId: groupId,
+            },
+        },
+        select: {
+            id: true,
+        },
+    });
+
+    return all;
 }
 
 export async function getSumOwnerStickers(userId: number) {
