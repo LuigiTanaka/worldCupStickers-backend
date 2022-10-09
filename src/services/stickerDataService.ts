@@ -2,7 +2,19 @@ import * as stickerDataRepository from "../repositories/stickerDataRepository";
 import * as stickerRepository from "../repositories/stickerRepository";
 import { notFoundError } from "../utils/errorUtils";
 
-export async function getSumAllStickers() {
+export async function getGeneralStickerData(userId: number) {
+    const sumAll = await getSumAllStickers();
+    const sumOwner = await getSumOwnerStickers(userId);
+    const sumRepeated = await getSumRepeatedStickers(userId);
+
+    return {
+        sumAll,
+        sumOwner,
+        sumRepeated,
+    };
+}
+
+async function getSumAllStickers() {
     const sumAllByCategory =
         await stickerDataRepository.getSumAllStickersByCategories();
 
@@ -11,10 +23,10 @@ export async function getSumAllStickers() {
         sumAll += obj._count.name;
     });
 
-    return { sumAll };
+    return sumAll;
 }
 
-export async function getSumOwnerStickers(userId: number) {
+async function getSumOwnerStickers(userId: number) {
     const user = await stickerRepository.getUserById(userId);
 
     if (!user) {
@@ -23,10 +35,10 @@ export async function getSumOwnerStickers(userId: number) {
 
     const sumOwner = await stickerDataRepository.getSumOwnerStickers(userId);
 
-    return { sumOwner: sumOwner.length };
+    return sumOwner.length;
 }
 
-export async function getSumRepeatedStickers(userId: number) {
+async function getSumRepeatedStickers(userId: number) {
     const user = await stickerRepository.getUserById(userId);
 
     if (!user) {
@@ -43,5 +55,5 @@ export async function getSumRepeatedStickers(userId: number) {
         }
     });
 
-    return { sumRepeated };
+    return sumRepeated;
 }
