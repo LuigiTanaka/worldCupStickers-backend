@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && npx prisma migrate deploy",
-    "start": "node dist/src/server.js",
+    "build": "tsc",
+    "start": "npm run prisma:deploy && node dist/src/server.js",
+    "prisma:deploy": "prisma migrate deploy && prisma db seed",
     "dev": "dotenv -e .env.test nodemon src/server.ts",
-    "prisma": "prisma migrate dev && prisma db seed",
-    "prisma-test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test prisma db seed",
+    "prisma:test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test prisma db seed",
     "test:integration": "npm run prisma-test && dotenv -e .env.test jest -- --no-cache --testPathPattern=tests/integration",
     "test:unit": "npm run prisma-test && dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit"
   },
