@@ -138,4 +138,13 @@ names.forEach((name, index) => {
     }
 });
 
-export { stickers, categories, groups };
+//users
+const users = [
+    {
+        username: "test",
+        email: "test@gmail.com",
+        password: "secret",
+    },
+];
+
+export { stickers, categories, groups, users };
