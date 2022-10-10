@@ -1,5 +1,8 @@
-import prisma from "../src/database/prisma";
 import { groups, categories, stickers, users } from "./data";
+import pkg from "@prisma/client";
+
+const { PrismaClient } = pkg;
+const prisma = new PrismaClient();
 
 async function main() {
     await prisma.$executeRaw`TRUNCATE TABLE groups RESTART IDENTITY CASCADE`;
