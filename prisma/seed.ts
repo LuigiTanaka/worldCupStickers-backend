@@ -1,8 +1,9 @@
 import prisma from "../src/database/prisma";
-import { groups, categories, stickers } from "./data";
+import { groups, categories, stickers, users } from "./data";
 
 async function main() {
     await prisma.$executeRaw`TRUNCATE TABLE groups RESTART IDENTITY CASCADE`;
+    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
 
     await prisma.group.createMany({
         data: groups,
@@ -14,6 +15,10 @@ async function main() {
 
     await prisma.sticker.createMany({
         data: stickers,
+    });
+
+    await prisma.user.createMany({
+        data: users,
     });
 }
 
