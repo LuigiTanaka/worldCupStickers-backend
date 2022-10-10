@@ -11,7 +11,7 @@ describe("sticker services tests", () => {
         jest.clearAllMocks();
     });
 
-    it("test creation of the relation between stickers and users successfully", async () => {
+    it("Test creation of the relation between stickers and users successfully", async () => {
         const stickerUser = stickerUserFactory();
         const sticker = stickerFactory();
         const user = userFactory();
@@ -46,7 +46,7 @@ describe("sticker services tests", () => {
         expect(stickerRepository.insertStickerUser).toBeCalled();
     });
 
-    it("test creation of the relation between stickers and a non-existent user", async () => {
+    it("Test creation of the relation between stickers and a non-existent user", async () => {
         const stickerUser = stickerUserFactory();
         const sticker = stickerFactory();
 
@@ -79,7 +79,7 @@ describe("sticker services tests", () => {
         expect(stickerRepository.insertStickerUser).not.toBeCalled();
     });
 
-    it("test creation of the relation between users and a non-existent sticker", async () => {
+    it("Test creation of the relation between users and a non-existent sticker", async () => {
         const stickerUser = stickerUserFactory();
         const user = userFactory();
 
@@ -112,7 +112,7 @@ describe("sticker services tests", () => {
         expect(stickerRepository.insertStickerUser).not.toBeCalled();
     });
 
-    it("test duplicate creation of the relation between stickers and users", async () => {
+    it("Test duplicate creation of the relation between stickers and users", async () => {
         const stickerUser = stickerUserFactory();
         const sticker = stickerFactory();
         const user = userFactory();
