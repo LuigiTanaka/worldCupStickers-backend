@@ -1,5 +1,9 @@
 import { Sticker } from "@prisma/client";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 type IStickerType = Omit<Sticker, "id">;
+
+dotenv.config();
 
 //groups
 const groups = [
@@ -139,12 +143,21 @@ names.forEach((name, index) => {
 });
 
 //users
-const users = [
-    {
-        username: "test",
-        email: "test@gmail.com",
-        password: "secret",
-    },
-];
+const user = {
+    username: "test",
+    email: "test@gmail.com",
+    password: "test123",
+};
+
+const SALT = Number(process.env.SALT) || 10;
+const passwordHash = bcrypt.hashSync(user.password, SALT);
+
+const userData = {
+    username: user.username,
+    email: user.email,
+    password: passwordHash,
+};
+
+const users = [userData];
 
 export { stickers, categories, groups, users };
