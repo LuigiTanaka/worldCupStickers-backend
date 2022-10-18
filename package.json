@@ -13,7 +13,7 @@
     "test:unit": "npm run prisma-test && dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit"
   },
   "prisma": {
-    "seed": "node dist/prisma/seed.js"
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
