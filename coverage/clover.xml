@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665375869744" clover="3.2.0">
-  <project timestamp="1665375869744" name="All files">
+<coverage generated="1673036111925" clover="3.2.0">
+  <project timestamp="1673036111925" name="All files">
     <metrics statements="61" coveredstatements="19" conditionals="14" coveredconditionals="3" methods="6" coveredmethods="1" elements="81" coveredelements="23" complexity="0" loc="61" ncloc="61" packages="1" files="1" classes="1"/>
-    <file name="stickerService.ts" path="/home/luigi/Documentos/DRIVEN/projeto22-word-cup-stickers/back-end/src/services/stickerService.ts">
+    <file name="stickerService.ts" path="/home/luigi/Documentos/worldCupStickers-backend/src/services/stickerService.ts">
       <metrics statements="61" coveredstatements="19" conditionals="14" coveredconditionals="3" methods="6" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="7" count="1" type="stmt"/>
