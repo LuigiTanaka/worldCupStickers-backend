@@ -42,7 +42,7 @@ JWT_SECRET = String qualquer
 DATABASE_URL = postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}
 POSTGRES_USER = Nome de usuário postgres
 POSTGRES_PASSWORD = Senha de usuário postgres
-POSTGRES_DB = nome que será atribuído ao banco de dados
+POSTGRES_DB = nome que deseja atribuir ao banco de dados
 ```
 
 4. Execute todas as migrations e popule o banco de dados com os dados iniciais com o comando:
